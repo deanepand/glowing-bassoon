@@ -59,8 +59,7 @@ export default function Home() {
               Code Snippets Collection
             </h2>
             <p className="mt-2 text-base font-bold text-black/60 max-w-xl">
-              Browse and share JavaScript code snippets. Drop .js, .cjs, or .mjs
-              files into the gist folder and they appear here automatically.
+              Browse and share JavaScript code snippets.
             </p>
             <div className="mt-4 flex flex-wrap gap-2">
               <span className="inline-flex items-center gap-1 border-2 border-black bg-yellow-300 px-3 py-1 text-xs font-black uppercase">
@@ -168,24 +167,6 @@ export default function Home() {
             </div>
           </Link>
         ))}
-      </div>
-
-      {/* How to add */}
-      <div className="mt-10 border-3 border-black bg-[#8338ec] p-6 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] text-white">
-        <h3 className="text-xl font-black uppercase flex items-center gap-2">
-          <Zap className="h-5 w-5" strokeWidth={3} />
-          Auto-Route Magic
-        </h3>
-        <p className="mt-2 font-bold text-white/80 text-sm">
-          Drop any <code className="bg-black/30 px-1.5 py-0.5">.js</code>,{" "}
-          <code className="bg-black/30 px-1.5 py-0.5">.cjs</code>, or{" "}
-          <code className="bg-black/30 px-1.5 py-0.5">.mjs</code> file into{" "}
-          <code className="bg-black/30 px-1.5 py-0.5">src/gist/</code> and it
-          automatically gets its own route at{" "}
-          <code className="bg-black/30 px-1.5 py-0.5">
-            /route/gist/filename.ext
-          </code>
-        </p>
       </div>
 
       {/* Support CTA */}

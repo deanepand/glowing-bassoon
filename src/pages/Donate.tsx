@@ -284,7 +284,7 @@ export default function Donate() {
           <div className="p-6 sm:p-8">
             <div className="flex flex-col sm:flex-row items-start gap-6">
               <div className="flex h-20 w-20 shrink-0 items-center justify-center border-3 border-black bg-[#ff6b35] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                <span className="text-3xl font-black text-black">eD</span>
+                <span className="text-3xl font-black text-black">E</span>
               </div>
               <div>
                 <h3 className="text-lg font-black uppercase text-black">

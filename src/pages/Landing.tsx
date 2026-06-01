@@ -262,68 +262,6 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* ===== HOW IT WORKS ===== */}
-      <section className="mb-12">
-        <div className="border-3 border-black bg-[#1e1e1e] shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
-          <div className="border-b-3 border-black bg-[#ffd166] px-6 py-4 flex items-center gap-3">
-            <Terminal className="h-6 w-6" strokeWidth={3} />
-            <h2 className="text-xl font-black uppercase tracking-tight">
-              Cara Kerja
-            </h2>
-          </div>
-          <div className="p-6 sm:p-8">
-            <div className="grid gap-6 sm:grid-cols-3">
-              {/* Step 1 */}
-              <div className="flex gap-4">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center border-3 border-[#ff6b35] bg-[#ff6b35] text-black">
-                  <span className="text-xl font-black">1</span>
-                </div>
-                <div>
-                  <h4 className="font-black text-white uppercase text-sm">
-                    Buat File
-                  </h4>
-                  <p className="mt-1 text-xs font-bold text-white/50 leading-relaxed">
-                    Buat file .js, .cjs, atau .mjs di folder{" "}
-                    <code className="bg-white/10 px-1 py-0.5">src/gist/</code>
-                  </p>
-                </div>
-              </div>
-              {/* Step 2 */}
-              <div className="flex gap-4">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center border-3 border-[#06d6a0] bg-[#06d6a0] text-black">
-                  <span className="text-xl font-black">2</span>
-                </div>
-                <div>
-                  <h4 className="font-black text-white uppercase text-sm">
-                    Auto Route
-                  </h4>
-                  <p className="mt-1 text-xs font-bold text-white/50 leading-relaxed">
-                    File otomatis punya route di{" "}
-                    <code className="bg-white/10 px-1 py-0.5">
-                      /route/gist/nama-file
-                    </code>
-                  </p>
-                </div>
-              </div>
-              {/* Step 3 */}
-              <div className="flex gap-4">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center border-3 border-[#3a86ff] bg-[#3a86ff] text-black">
-                  <span className="text-xl font-black">3</span>
-                </div>
-                <div>
-                  <h4 className="font-black text-white uppercase text-sm">
-                    Share & Download
-                  </h4>
-                  <p className="mt-1 text-xs font-bold text-white/50 leading-relaxed">
-                    Copy link, download file, atau langsung baca code-nya.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ===== RECENT GISTS PREVIEW ===== */}
       <section className="mb-12">
         <div className="mb-6 flex items-center justify-between">
