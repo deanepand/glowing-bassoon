@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+@theme {
+  --font-mono: "JetBrains Mono", "Fira Code", "SF Mono", "Cascadia Code",
+    ui-monospace, monospace;
+}
+
+/* Neo-brutalism base styles */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  background-color: #e8e4df;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #2d2d2d;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #555;
+  border: 2px solid #2d2d2d;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #777;
+}
+
+/* Selection style */
+::selection {
+  background: #ff6b35;
+  color: black;
+}
+
+/* Custom border width */
+@utility border-3 {
+  border-width: 3px;
+}
