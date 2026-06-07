@@ -1,102 +1,75 @@
+import { Request, Response } from 'express';
 import axios from 'axios';
 import crypto from 'crypto';
 
 const BASE_URL = 'https://react-channelwa.vercel.app/api';
-const API_KEY = process.env.API_KEY || 'your-secret-key';
-
 const UA = 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Mobile Safari/537.36';
 
-function generateDeviceId() {
+function generateDeviceId(): string {
     return crypto.randomBytes(16).toString('hex');
 }
 
-async function reactToChannel(postUrl, emoji = '🔥') {
+async function reactToChannel(postUrl: string, emoji: string = '🔥') {
     const deviceId = generateDeviceId();
     const deviceName = `Device-${Math.floor(Math.random() * 9000) + 1000}`;
 
-    const headers = {
-        'Content-Type': 'application/json',
-        'User-Agent': UA,
-        'Origin': 'https://react-channelwa.vercel.app',
-        'Referer': 'https://react-channelwa.vercel.app/'
-    };
-
-    // Step 1: Register Device
+    // Step 1: Register device baru
     const regRes = await axios.post(`${BASE_URL}/register-device`, {
-        deviceId,
+        deviceId: deviceId,
         name: deviceName
-    }, { headers });
+    }, {
+        headers: {
+            'Content-Type': 'application/json',
+            'User-Agent': UA,
+            'Origin': 'https://react-channelwa.vercel.app',
+            'Referer': 'https://react-channelwa.vercel.app/'
+        }
+    });
 
     const deviceKey = regRes.data?.deviceKey;
     if (!deviceKey) throw new Error('Gagal register device');
 
-    // Step 2: Inject Reaction
+    // Step 2: Inject reaksi
     const injRes = await axios.post(`${BASE_URL}/inject`, {
-        deviceKey,
+        deviceKey: deviceKey,
         url: postUrl,
         emojis: emoji
-    }, { headers });
+    }, {
+        headers: {
+            'Content-Type': 'application/json',
+            'User-Agent': UA,
+            'Origin': 'https://react-channelwa.vercel.app',
+            'Referer': 'https://react-channelwa.vercel.app/'
+        }
+    });
 
     return {
-        deviceId,
-        deviceKey,
-        deviceName,
+        deviceId: deviceId,
+        deviceKey: deviceKey,
+        deviceName: deviceName,
         result: injRes.data
     };
 }
 
-// =============================================
-// Ambil API Key dari Header atau Query
-// =============================================
-function extractApiKey(req) {
-    const headerKey = req.headers['x-api-key'];
-    if (headerKey) return headerKey;
+export default async function (req: Request, res: Response) {
+    // 1. Ambil parameter
+    const { url, emoji } = req.query;
 
-    const queryKey = req.query?.apikey;
-    if (queryKey) return queryKey;
+    // 2. Validasi
+    if (!url) return res.json({ 
+        status: false, 
+        message: "Parameter 'url' wajib diisi!" 
+    });
 
-    return undefined;
-}
-
-// =============================================
-// Main Handler
-// =============================================
-export default async function handler(req, res) {
-    // 1. Ambil API Key
-    const apikey = extractApiKey(req);
-
-    // 2. Validasi API Key
-    if (!apikey) {
-        return res.status(401).json({
-            status: false,
-            message: 'API Key diperlukan! Kirim via header "x-api-key" atau query "apikey".'
-        });
-    }
-
-    if (apikey !== API_KEY) {
-        return res.status(403).json({
-            status: false,
-            message: 'API Key tidak valid!'
-        });
-    }
-
-    // 3. Ambil Parameter
-    const url  = req.query?.url;
-    const emoji = req.query?.emoji || '🔥';
-
-    // 4. Validasi URL
-    if (!url) {
-        return res.status(400).json({
-            status: false,
-            message: "Parameter 'url' wajib diisi!"
-        });
-    }
-
-    // 5. Logic
+    // 3. Logic
     try {
-        const data = await reactToChannel(url, emoji);
+        const data = await reactToChannel(
+            url as string,
+            (emoji as string) || '🔥'
+        );
 
-        return res.status(200).json({
+        // 4. Response
+        return res.json({
             status: true,
             result: {
                 deviceId: data.deviceId,
@@ -108,10 +81,10 @@ export default async function handler(req, res) {
             }
         });
 
-    } catch (error) {
-        return res.status(500).json({
+    } catch (error: any) {
+        return res.json({
             status: false,
-            message: error.response?.data?.message || error.message || 'Terjadi kesalahan!'
+            message: error.response?.data?.message || error.message || "Terjadi kesalahan!"
         });
     }
-}
+};
